@@ -1,0 +1,95 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ApiDocument">
+    <Color x:Key="TabItemGradStart" R="#AA" G="#AA" B="#BB"/>
+    <Color x:Key="TabItemGradEnd" R="#EE" G="#EE" B="#FF" A="#FF"/>
+    <Color x:Key="TabItemGradStartSel" R="#00" G="#00" B="#DD"/>
+    <Color x:Key="TabItemGradEndSel" R="#99" G="#99" B="#FF" A="#FF"/>
+    <Color x:Key="TabItemGradStartDisabled" R="#AA" G="#AA" B="#AA"/>
+    <Color x:Key="TabItemGradEndDisabled" R="#FF" G="#FF" B="#FF" A="#FF"/>
+    <Color x:Key="TabItemGradStartHover" R="#FF" G="#FF" B="#66"/>
+    <Color x:Key="TabItemGradEndHover" R="#FF" G="#FF" B="#99" A="#FF"/>
+    <LinearGradientBrush x:Key="TabBackgorundBrush" StartPoint="0,0" EndPoint="0,1" >
+        <GradientStop Offset="0" Color="{StaticResource TabItemGradStart}"/>
+        <GradientStop Offset="1" Color="{StaticResource TabItemGradEnd}"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="TabBackgorundBrushSel" StartPoint="0,0" EndPoint="0,1" >
+        <GradientStop Offset="0" Color="{StaticResource TabItemGradStartSel}"/>
+        <GradientStop Offset="1" Color="{StaticResource TabItemGradEndSel}"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="TabBackgorundBrushDisabled" StartPoint="0,0" EndPoint="0,1" >
+        <GradientStop Offset="0" Color="{StaticResource TabItemGradStartDisabled}"/>
+        <GradientStop Offset="1" Color="{StaticResource TabItemGradEndDisabled}"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="TabBackgorundBrushHover" StartPoint="0,0" EndPoint="0,1" >
+        <GradientStop Offset="0" Color="{StaticResource TabItemGradStartHover}"/>
+        <GradientStop Offset="1" Color="{StaticResource TabItemGradEndHover}"/>
+    </LinearGradientBrush>
+    <Style x:Key="GelTabItem" TargetType="{x:Type TabItem}">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="Gray"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabItem}">
+                    <Border Padding="3">
+                        <Grid Height="25">
+                            <Border CornerRadius="5,5,5,5" Background="{TemplateBinding Background}" 
+	                   BorderBrush="{TemplateBinding BorderBrush}" 
+	                   BorderThickness="{TemplateBinding BorderThickness}" />
+                            <Rectangle Name="TabItemBackgorund" RadiusX="5" 
+                                 RadiusY="5" Fill="{StaticResource TabBackgorundBrush}">
+                            </Rectangle>
+                            <Border BorderThickness="{TemplateBinding BorderThickness}" 
+                          Padding="{TemplateBinding Padding}">
+                                <ContentPresenter ContentSource="Header" 
+	                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+	                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="TabItemBackgorund" Property="Fill" 
+                            Value="{StaticResource TabBackgorundBrushSel}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="False">
+                            <Setter TargetName="TabItemBackgorund" Property="Fill" 
+                            Value="{StaticResource TabBackgorundBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="TabItemBackgorund" Property="Fill" 
+                            Value="{StaticResource TabBackgorundBrushDisabled}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="GelTabControl" TargetType="{x:Type TabControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabControl">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Border BorderBrush="Transparent" BorderThickness="0" Grid.Row="1" 
+                      CornerRadius="5,5,5,5" Background="Transparent" Padding="5,5,5,5" >
+                            <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5,5,5,5" 
+                          Background="{StaticResource TabBackgorundBrushSel}"  >
+                                <ContentPresenter ContentSource="SelectedContent" />
+                            </Border>
+                        </Border>
+                        <TabPanel Grid.Row="0" IsItemsHost="true"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+
+</ResourceDictionary>
